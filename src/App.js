@@ -11,27 +11,25 @@ function App() {
 	React.useEffect(() => {
 		if (fetching) {
 			axios
-				.get(`https://jsonplaceholder.typicode.com/photos?_limit=15&_page=${currentPage}`)
+				.get(`https://jsonplaceholder.typicode.com/photos?_limit=9&_page=${currentPage}`)
 				.then((res) => {
-					store.getPhotos(res.data)
-                    console.log(currentPage);
-				}).finally(()=>{
-					setFetching(false)
+					store.getPhotos(res.data);
 				})
+				.finally(() => {
+					setFetching(false);
+				});
 		}
-	}, [fetching]);
+	}, [currentPage]);
 
 	React.useEffect(() => {
-		
-		 window.addEventListener("scroll", scrollHandler);
-
-        return () => window.removeEventListener("scroll", scrollHandler	);
+		window.addEventListener('scroll', scrollHandler);
+		return () => window.removeEventListener('scroll', scrollHandler);
 	}, []);
 
 	const scrollHandler = async () => {
 		if (
 			window.innerHeight + document.documentElement.scrollTop + 1 >=
-            document.documentElement.scrollHeight
+			document.documentElement.scrollHeight
 		) {
 			setCurrentPage((prev) => prev + 1);
 			setFetching(true);
@@ -42,7 +40,7 @@ function App() {
 			<header className='header'>
 				<h2>Infinity Scroll</h2>
 			</header>
-			<Main/>
+			<Main />
 		</div>
 	);
 }

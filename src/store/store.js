@@ -6,7 +6,7 @@ class store {
 		makeAutoObservable(this);
 	}
 	getPhotos(items) {
-		this.photos = items;
+		this.photos.push(...items)
 	}
 }
 
